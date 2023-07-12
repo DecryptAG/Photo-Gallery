@@ -15,7 +15,7 @@ export default function useFirestore(collectionName:string) {
         let unsubscribe: () => void
         const getData = ()=>{
             try{
-                const q = query(collection(db, collectionName));
+                const q = query(collection(db, collectionName),orderBy("createdAt","desc"));
                 unsubscribe  = onSnapshot(q, (querySnapshot) => {
                 const images: Image[] = [];
                 querySnapshot.forEach((doc) => {

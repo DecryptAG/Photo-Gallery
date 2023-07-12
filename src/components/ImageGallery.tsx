@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import useFirestore from "../hooks/useFirestore"
 const ImageGallery = () => {
   const {docs: images, isLoading} = useFirestore('images');
-  
+  const navigate = useNavigate();
   
   if(isLoading)
   {
@@ -13,14 +14,20 @@ const ImageGallery = () => {
     
   }
   return (
-    <div>
+    <div className="grid md:grid-cols-3 justify-center gap-4 mt-10">
       {images.map(image=>(
          
-          <div key={image.imageURL} className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src={image.imageURL}></img></figure>
-          <div className="card-body">
+          <div key={image.imageURL} className="card w-full bg-base-100 shadow-xl">
+          <figure  className="max-h-[15rem]" ><embed        
+              src={image.imageURL}
+              type="application/pdf"
+              height="100%"
+              width="100%"
+            ></embed></figure>
+          <div className="card-body flex ">
               <div className="badge badge-outline">{image.userEmail}</div> 
-              <div className="badge badge-outline">{image.createdAt.toLocaleDateString()}</div></div>
+              <div className="badge badge-outline">{image.createdAt.toLocaleDateString()}</div>
+          </div>
               </div>
       ))}
         
