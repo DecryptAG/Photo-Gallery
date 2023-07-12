@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import useFirestore from "../hooks/useFirestore"
 const ImageGallery = () => {
   const {docs: images, isLoading} = useFirestore('images');
-  const navigate = useNavigate();
   
   if(isLoading)
   {
